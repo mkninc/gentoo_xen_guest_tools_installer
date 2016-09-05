@@ -337,10 +337,10 @@ cat - > $CONFSCRIPT <<< "\
 ProgressReport 0 "Patching /usr/sbin/xe-linux-distribution"
 cd /usr/sbin
 patch <<< "\
---- xe-linux-distribution       2011-07-06 14:24:23.551498005 +0700
-+++ xe-linux-distribution.gentoo        2011-07-06 15:18:52.107497524 +0700
-@@ -249,6 +249,24 @@
-     write_to_output \"\${distro}\" \"\${major}\" \"\${minor}\" \"\${description}\"
+--- xe-linux-distribution       2016-08-13 17:14:49.875707568 +0200
++++ xe-linux-distribution.gentoo        2016-08-13 17:15:33.895555623 +0200
+@@ -293,6 +293,24 @@
+
  }
 
 +identify_gentoo()
@@ -358,16 +358,16 @@ patch <<< "\
 +       if [ -z \"\${major}\" -o -z \"\$minor\" ] ; then
 +               return 1
 +       fi
-+       write_to_output \"\${distro}\" \"\${major}\" \"\${minor}\" \"\${distro}\"
++       write_to_output \"\${distro}\" \"\${major}\" \"\${minor}\" \"\$(head -n 1 \${gentoo_release})\"
 +}
 +
  if [ \$# -eq 1 ] ; then
      exec 1>\"\$1\"
  fi
-@@ -258,6 +276,7 @@
-     identify_sles   /etc/SuSE-release   && exit 0
+@@ -306,6 +324,7 @@
      identify_lsb    lsb_release         && exit 0
      identify_debian /etc/debian_version && exit 0
+     identify_boot2docker /etc/boot2docker && exit 0
 +    identify_gentoo /etc/gentoo-release && exit 0
 
      if [ \$# -eq 1 ] ; then
