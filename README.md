@@ -1,4 +1,4 @@
-Script to install XEN guest Tools 7.0 on Gentoo Linux.
+Script to install XEN Guest Tools on Gentoo Linux.
 
 Modified version which works with Xen Guest Tools 7.0
 
